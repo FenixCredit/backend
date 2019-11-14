@@ -21,3 +21,23 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+config/application.yml
+config/cable.yml
+config/database.yml
+config/secrets.yml
+config/sidekiq.yml
+config/storage.yml
+public/uploads
+.DS_Store
+.ruby-version
+dump.rdb
+
+# Ignore application configuration
+/config/application.yml
+
+# PDF for testing
+
+/public/document.pdf
+
+/.vscode/
