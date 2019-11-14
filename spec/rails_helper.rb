@@ -6,6 +6,8 @@ require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
+require 'support/factory_bot'
+require 'support/helpers/request'
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
     with.test_framework :rspec
@@ -36,7 +38,7 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 RSpec.configure do |config|
-  config.include FactoryBot::Syntax::Methods
+  config.include Helpers::Request, type: :request
 
   config.before(:suite) do
     DatabaseCleaner.strategy = :transaction
