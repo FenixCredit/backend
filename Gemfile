@@ -17,6 +17,8 @@ gem 'active_model_serializers'
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 3.8', '>= 3.8.2'
+  gem 'factory_bot_rails', '~> 5.0', '>= 5.0.2'
+  gem 'faker', '~> 1.9', '>= 1.9.4'
 end
 
 group :development do
@@ -26,9 +28,7 @@ group :development do
 end
 
 group :test do
-  gem 'factory_bot_rails', '~> 5.0', '>= 5.0.2'
   gem 'shoulda-matchers', '~> 4.1'
-  gem 'faker', '~> 1.9', '>= 1.9.4'
   gem 'json_spec', '~> 1.1', '>= 1.1.5'
   gem 'database_cleaner', '~> 1.7'
 end
