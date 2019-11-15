@@ -5,6 +5,8 @@ class User::FormObject
                 :profile_picture, :birthday, :is_active, :preferences,
                 :password, :password_confirmation
 
+  attr_reader :user
+
   def save
     return false if invalid?
 
