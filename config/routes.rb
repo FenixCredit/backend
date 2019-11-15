@@ -5,6 +5,7 @@ Rails.application.routes.draw do
     scope module: :v1, constraints: ApiVersionConstraint.new(version: 1) do
       resources :users, only: [:create]
       resources :sessions, only: [:create]
+      delete 'sessions', to: 'sessions#destroy'
     end
   end
 end

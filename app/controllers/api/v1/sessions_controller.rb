@@ -15,6 +15,16 @@ class Api::V1::SessionsController < ApplicationController
     end
   end
 
+  def destroy
+    @result = Session::DestroyUserSession.call(@session_token)
+
+    if @result.session_destroyed?
+      render json: {}
+    else
+      render json: { errors: @result.errors }, status: :bad_request
+    end
+  end
+
   private
 
   def session_params
