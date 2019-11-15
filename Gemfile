@@ -11,6 +11,8 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'rack-cors'
 gem 'carrierwave', '~> 1.3', '>= 1.3.1'
 gem 'jwt'
+gem 'immutable-struct'
+gem 'active_model_serializers'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
