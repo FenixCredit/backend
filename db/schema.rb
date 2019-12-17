@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_17_152625) do
+ActiveRecord::Schema.define(version: 2019_12_17_211907) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -26,6 +26,22 @@ ActiveRecord::Schema.define(version: 2019_12_17_152625) do
     t.index ["user_id"], name: "index_admins_on_user_id"
   end
 
+  create_table "employees", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "email"
+    t.string "password_digest"
+    t.string "contract"
+    t.string "picture"
+    t.integer "status", default: 1
+    t.uuid "user_id"
+    t.uuid "admin_id"
+    t.uuid "role_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["admin_id"], name: "index_employees_on_admin_id"
+    t.index ["role_id"], name: "index_employees_on_role_id"
+    t.index ["user_id"], name: "index_employees_on_user_id"
+  end
+
   create_table "equipment", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "code"
     t.string "name"
@@ -36,6 +52,12 @@ ActiveRecord::Schema.define(version: 2019_12_17_152625) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["admin_id"], name: "index_equipment_on_admin_id"
+  end
+
+  create_table "roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "tokens", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -58,6 +80,9 @@ ActiveRecord::Schema.define(version: 2019_12_17_152625) do
   end
 
   add_foreign_key "admins", "users"
+  add_foreign_key "employees", "admins"
+  add_foreign_key "employees", "roles"
+  add_foreign_key "employees", "users"
   add_foreign_key "equipment", "admins"
   add_foreign_key "tokens", "users"
 end

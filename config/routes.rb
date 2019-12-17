@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
       scope module: :dashboard, constraints: ApiPlatformConstraint.new(platform: 'dashboard') do
         resources :admins, only: [:create, :index]
+        resources :employees, only: [:create, :index]
         get 'profile', to: 'admins#profile'
       end
     end
