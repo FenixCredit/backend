@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_17_215833) do
+ActiveRecord::Schema.define(version: 2019_12_17_223745) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -24,6 +24,20 @@ ActiveRecord::Schema.define(version: 2019_12_17_215833) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_admins_on_user_id"
+  end
+
+  create_table "clients", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.integer "client_type", default: 1
+    t.string "street"
+    t.string "external_number"
+    t.string "internal_number"
+    t.string "colony"
+    t.uuid "user_id"
+    t.uuid "promoter_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["promoter_id"], name: "index_clients_on_promoter_id"
+    t.index ["user_id"], name: "index_clients_on_user_id"
   end
 
   create_table "employees", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -91,6 +105,8 @@ ActiveRecord::Schema.define(version: 2019_12_17_215833) do
   end
 
   add_foreign_key "admins", "users"
+  add_foreign_key "clients", "promoters"
+  add_foreign_key "clients", "users"
   add_foreign_key "employees", "admins"
   add_foreign_key "employees", "roles"
   add_foreign_key "employees", "users"
