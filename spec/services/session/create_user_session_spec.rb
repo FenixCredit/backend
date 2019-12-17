@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe Session::CreateUserSession do
-  let(:user) { create(:user) }
+  let(:admin) { create(:admin) }
 
   let(:session_params) do
     {
-      email: user.email,
-      password: user.password,
+      email: admin.email,
+      password: admin.password,
     }
   end
 

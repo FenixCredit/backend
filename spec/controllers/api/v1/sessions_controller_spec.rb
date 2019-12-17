@@ -2,13 +2,13 @@ require 'rails_helper'
 
 RSpec.describe Api::V1::SessionsController, type: :request do
   describe 'POST #create' do
-    let(:user) { create(:user) }
+    let(:admin) { create(:admin) }
 
     let(:params) do
      {
        session: {
-         email: user.email,
-         password: user.password
+         email: admin.email,
+         password: admin.password
        }
      }
     end
