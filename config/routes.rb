@@ -3,9 +3,13 @@ Rails.application.routes.draw do
   get '/health', to: 'health#health'
   scope module: :api do
     scope module: :v1, constraints: ApiVersionConstraint.new(version: 1) do
-      resources :users, only: [:create]
       resources :sessions, only: [:create]
       delete 'sessions', to: 'sessions#destroy'
+
+      scope module: :dashboard, constraints: ApiPlatformConstraint.new(platform: 'dashboard') do
+        resources :admins, only: [:create, :index]
+        get 'profile', to: 'admins#profile'
+      end
     end
   end
 end

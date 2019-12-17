@@ -13,6 +13,6 @@ module RequestAuthentication
   private
 
   def authenticate_user
-    @current_user = Token.find_by_content(session_token)
+    @current_user = Token.find_by_content(session_token).user
   end
 end
