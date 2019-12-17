@@ -3,6 +3,10 @@ class Session::CreateUserSession
 
   def self.call(session_params)
     @admin = Admin.find_by_email(session_params[:email])
+    
+    if @admin.nil?
+      @admin = Employee.find_by_email(session_params[:email])
+    end
 
     if @admin&.authenticate(session_params[:password])
       Result.new(

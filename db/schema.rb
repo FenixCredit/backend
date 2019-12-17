@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_17_211907) do
+ActiveRecord::Schema.define(version: 2019_12_17_215833) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -54,6 +54,17 @@ ActiveRecord::Schema.define(version: 2019_12_17_211907) do
     t.index ["admin_id"], name: "index_equipment_on_admin_id"
   end
 
+  create_table "promoters", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "aka"
+    t.string "contract"
+    t.uuid "user_id"
+    t.uuid "employee_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["employee_id"], name: "index_promoters_on_employee_id"
+    t.index ["user_id"], name: "index_promoters_on_user_id"
+  end
+
   create_table "roles", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -84,5 +95,7 @@ ActiveRecord::Schema.define(version: 2019_12_17_211907) do
   add_foreign_key "employees", "roles"
   add_foreign_key "employees", "users"
   add_foreign_key "equipment", "admins"
+  add_foreign_key "promoters", "employees"
+  add_foreign_key "promoters", "users"
   add_foreign_key "tokens", "users"
 end

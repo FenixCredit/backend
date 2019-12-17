@@ -2,6 +2,7 @@ class Employee < ApplicationRecord
   belongs_to :user
   belongs_to :admin
   belongs_to :role
+  has_many :promoters, dependent: :nullify
 
   validates :email, uniqueness: true
 
