@@ -33,7 +33,8 @@ class Api::V1::SessionsController < ApplicationController
 
   def jwt_session_payload
     {
-      token: @result.session.content
+      token: @result.session.content,
+      user: @result.session.user.as_json
     }
   end
 end
