@@ -25,6 +25,8 @@ class Api::V1::Dashboard::PromotersController < ApplicationController
     params.require(:promoter).permit(
       :aka,
       :contract,
+      :address,
+      :comission,
       user: [
         :first_name,
         :last_name,

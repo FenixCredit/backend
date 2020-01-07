@@ -1,7 +1,7 @@
 class Promoter::FormObject
   include ActiveModel::Model
 
-  attr_accessor :aka, :contract, :user_id, :employee_id
+  attr_accessor :aka, :contract, :address, :comission, :user_id, :employee_id
 
   attr_reader :promoter
 
@@ -28,6 +28,8 @@ class Promoter::FormObject
     {
       aka: aka,
       contract: contract,
+      address: address,
+      comission: comission,
       user_id: user_id,
       employee_id: employee_id,
     }.reject { |_, v| v.nil? }
