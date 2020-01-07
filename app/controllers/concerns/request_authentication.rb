@@ -6,8 +6,7 @@ module RequestAuthentication
   end
 
   def session_token
-    jwt = JsonWebToken.decode(request.headers.fetch('Authorization'))
-    @session_token = jwt[:token]
+    @session_token = request.headers.fetch('Authorization')
   end
 
   private
