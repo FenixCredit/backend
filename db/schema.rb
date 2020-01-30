@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_22_232734) do
+ActiveRecord::Schema.define(version: 2020_01_30_204307) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -73,6 +73,42 @@ ActiveRecord::Schema.define(version: 2020_01_22_232734) do
     t.index ["admin_id"], name: "index_equipment_on_admin_id"
   end
 
+  create_table "guarantees", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.boolean "is_fovourite", default: false
+    t.string "street"
+    t.string "external_number"
+    t.string "internal_number"
+    t.string "colony"
+    t.string "identification"
+    t.string "address_proof"
+    t.string "warning_letter"
+    t.uuid "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_guarantees_on_user_id"
+  end
+
+  create_table "loans", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.float "quantity", default: 0.0
+    t.integer "status", default: 1
+    t.string "period"
+    t.uuid "client_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_loans_on_client_id"
+  end
+
+  create_table "promissory_notes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "file"
+    t.string "code"
+    t.uuid "loan_id"
+    t.uuid "guarantee_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["guarantee_id"], name: "index_promissory_notes_on_guarantee_id"
+    t.index ["loan_id"], name: "index_promissory_notes_on_loan_id"
+  end
+
   create_table "promoters", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "aka"
     t.string "contract"
@@ -118,6 +154,10 @@ ActiveRecord::Schema.define(version: 2020_01_22_232734) do
   add_foreign_key "employees", "roles"
   add_foreign_key "employees", "users"
   add_foreign_key "equipment", "admins"
+  add_foreign_key "guarantees", "users"
+  add_foreign_key "loans", "clients"
+  add_foreign_key "promissory_notes", "guarantees"
+  add_foreign_key "promissory_notes", "loans"
   add_foreign_key "promoters", "employees"
   add_foreign_key "promoters", "users"
   add_foreign_key "tokens", "users"
