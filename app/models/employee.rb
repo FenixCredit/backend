@@ -5,8 +5,7 @@ class Employee < ApplicationRecord
   has_many :promoters, dependent: :nullify
 
   validates :email, uniqueness: true
-
-  validates :email, presence: true
+  validates :email, :salary, presence: true
 
   enum status: { enabled: 1, disabled: 2 }
 

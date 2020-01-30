@@ -28,6 +28,8 @@ class Api::V1::Dashboard::EmployeesController < ApplicationController
       :contract,
       :picture,
       :role_id,
+      :salary,
+      :address,
       user: [
         :first_name,
         :last_name,

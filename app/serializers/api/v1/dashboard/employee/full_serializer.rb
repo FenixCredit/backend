@@ -1,5 +1,5 @@
 class Api::V1::Dashboard::Employee::FullSerializer < ActiveModel::Serializer
-  attributes :id, :email, :contract, :picture, :status
+  attributes :id, :email, :contract, :picture, :salary, :address, :status
 
   belongs_to :user, serializer: Api::V1::Dashboard::UserSerializer
   belongs_to :admin, serializer: Api::V1::Dashboard::Admin::FullSerializer

@@ -1,7 +1,7 @@
 class Employee::FormObject
   include ActiveModel::Model
 
-  attr_accessor :email, :password, :password_confirmation, :contract, :picture, :status, :user_id, :admin_id, :role_id
+  attr_accessor :email, :password, :password_confirmation, :contract, :picture, :salary, :address, :status, :user_id, :admin_id, :role_id
 
   attr_reader :employee
 
@@ -31,6 +31,8 @@ class Employee::FormObject
       password_confirmation: password_confirmation,
       contract: contract,
       picture: picture,
+      salary: salary,
+      address: address,
       status: status,
       user_id: user_id,
       admin_id: admin_id,

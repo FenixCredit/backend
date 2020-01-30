@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_07_213738) do
+ActiveRecord::Schema.define(version: 2020_01_22_232734) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -36,6 +36,9 @@ ActiveRecord::Schema.define(version: 2020_01_07_213738) do
     t.uuid "promoter_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "identification"
+    t.string "address_proof"
+    t.string "warning_letter"
     t.index ["promoter_id"], name: "index_clients_on_promoter_id"
     t.index ["user_id"], name: "index_clients_on_user_id"
   end
@@ -51,6 +54,8 @@ ActiveRecord::Schema.define(version: 2020_01_07_213738) do
     t.uuid "role_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "salary", default: 0.0
+    t.string "address"
     t.index ["admin_id"], name: "index_employees_on_admin_id"
     t.index ["role_id"], name: "index_employees_on_role_id"
     t.index ["user_id"], name: "index_employees_on_user_id"
