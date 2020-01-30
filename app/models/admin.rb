@@ -6,5 +6,7 @@ class Admin < ApplicationRecord
 
   validates :email, presence: true
 
+  mount_uploader :photo, AdminPhotoUploader
+
   has_secure_password
 end
