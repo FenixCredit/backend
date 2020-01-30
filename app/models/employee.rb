@@ -9,5 +9,8 @@ class Employee < ApplicationRecord
 
   enum status: { enabled: 1, disabled: 2 }
 
+  mount_uploader :contract, EmployeeContractUploader
+  mount_uploader :picture, EmployeePictureUploader
+
   has_secure_password
 end
