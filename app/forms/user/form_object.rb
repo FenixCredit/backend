@@ -31,6 +31,6 @@ class User::FormObject
       phone: phone,
       gender: gender.to_i,
       birthday: birthday
-    }
+    }.reject { |_, v| v.nil? }
   end
 end

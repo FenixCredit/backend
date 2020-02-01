@@ -31,6 +31,6 @@ class Admin::FormObject
       password_confirmation: password_confirmation,
       photo: photo,
       user_id: user_id
-    }
+    }.reject { |_, v| v.nil? }
   end
 end
