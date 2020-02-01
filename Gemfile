@@ -13,6 +13,8 @@ gem 'jwt'
 gem 'immutable-struct'
 gem 'active_model_serializers'
 gem 'carrierwave', '~> 2.0'
+gem 'elasticsearch-model'
+gem 'kaminari'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
