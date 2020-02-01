@@ -4,5 +4,5 @@ class PromissoryNote < ApplicationRecord
 
   validates :file, :code, presence: true
 
-  mount_uploader :photo, AdminPhotoUploader
+  mount_uploader :file, PromissoryNoteFileUploader
 end
