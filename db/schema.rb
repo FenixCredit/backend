@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_30_204307) do
+ActiveRecord::Schema.define(version: 2020_01_31_235640) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -73,8 +73,17 @@ ActiveRecord::Schema.define(version: 2020_01_30_204307) do
     t.index ["admin_id"], name: "index_equipment_on_admin_id"
   end
 
+  create_table "guarantee_products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "promissory_note_id"
+    t.uuid "product_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_guarantee_products_on_product_id"
+    t.index ["promissory_note_id"], name: "index_guarantee_products_on_promissory_note_id"
+  end
+
   create_table "guarantees", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.boolean "is_fovourite", default: false
+    t.boolean "is_favourite", default: false
     t.string "street"
     t.string "external_number"
     t.string "internal_number"
@@ -96,6 +105,14 @@ ActiveRecord::Schema.define(version: 2020_01_30_204307) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["client_id"], name: "index_loans_on_client_id"
+  end
+
+  create_table "products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "name"
+    t.float "value", default: 0.0
+    t.string "photo"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "promissory_notes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -154,6 +171,8 @@ ActiveRecord::Schema.define(version: 2020_01_30_204307) do
   add_foreign_key "employees", "roles"
   add_foreign_key "employees", "users"
   add_foreign_key "equipment", "admins"
+  add_foreign_key "guarantee_products", "products"
+  add_foreign_key "guarantee_products", "promissory_notes"
   add_foreign_key "guarantees", "users"
   add_foreign_key "loans", "clients"
   add_foreign_key "promissory_notes", "guarantees"
