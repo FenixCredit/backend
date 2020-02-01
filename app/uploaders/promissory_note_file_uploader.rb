@@ -1,4 +1,4 @@
-class PromoterContractUploader < CarrierWave::Uploader::Base
+class PromissoryNoteFileUploader < CarrierWave::Uploader::Base
   storage :file
 
   # Add a white list of extensions which are allowed to be uploaded.
@@ -19,6 +19,6 @@ class PromoterContractUploader < CarrierWave::Uploader::Base
   end
 
   def store_dir
-    "uploads/promoter/#{mounted_as}/#{model.id}"
+    "uploads/promissory_note/#{mounted_as}/#{model.id}"
   end
 end

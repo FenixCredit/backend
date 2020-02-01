@@ -1,10 +1,10 @@
-class PromoterContractUploader < CarrierWave::Uploader::Base
+class ProductPhotoUploader < CarrierWave::Uploader::Base
   storage :file
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_whitelist
-    %w(pdf)
+    %w(jpg jpeg png)
   end
 
   # Override the filename of the uploaded files:
@@ -19,6 +19,6 @@ class PromoterContractUploader < CarrierWave::Uploader::Base
   end
 
   def store_dir
-    "uploads/promoter/#{mounted_as}/#{model.id}"
+    "uploads/product/#{mounted_as}/#{model.id}"
   end
 end
