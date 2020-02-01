@@ -1,7 +1,7 @@
 class CreateGuarantees < ActiveRecord::Migration[5.2]
   def change
     create_table :guarantees, id: :uuid do |t|
-      t.boolean :is_fovourite, default: false
+      t.boolean :is_favourite, default: false
       t.string :street
       t.string :external_number
       t.string :internal_number
