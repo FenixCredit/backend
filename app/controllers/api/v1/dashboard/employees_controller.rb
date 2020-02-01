@@ -7,7 +7,7 @@ class Api::V1::Dashboard::EmployeesController < ApplicationController
               serializer: Api::V1::Dashboard::Employee::FullSerializer,
               status: :created
     else
-      render json: { errors: @result.errors[:base] }, status: :bad_request
+      render json: { errors: @result.errors }, status: :bad_request
     end
   end
 

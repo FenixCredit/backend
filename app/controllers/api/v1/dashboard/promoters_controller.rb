@@ -7,7 +7,7 @@ class Api::V1::Dashboard::PromotersController < ApplicationController
               serializer: Api::V1::Dashboard::Promoter::FullSerializer,
               status: :created
     else
-      render json: { errors: @result.errors[:base] }, status: :bad_request
+      render json: { errors: @result.errors }, status: :bad_request
     end
   end
 

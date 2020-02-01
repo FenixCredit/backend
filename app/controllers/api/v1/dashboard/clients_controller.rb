@@ -7,12 +7,12 @@ class Api::V1::Dashboard::ClientsController < ApplicationController
               serializer: Api::V1::Dashboard::Client::FullSerializer,
               status: :created
     else
-      render json: { errors: @result.errors[:base] }, status: :bad_request
+      render json: { errors: @result.errors }, status: :bad_request
     end
   end
 
   def index
-    clients = ::Client.all
+    clients = ::Client::DefaultFilter.new.filter(params)
 
     render json: clients,
             each_serializer: Api::V1::Dashboard::Client::FullSerializer,
