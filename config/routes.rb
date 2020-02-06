@@ -11,6 +11,8 @@ Rails.application.routes.draw do
         resources :employees, only: [:create, :index]
         resources :promoters, only: [:create, :index]
         resources :clients, only: [:create, :index]
+        resources :guarantees, only: [:index]
+        resources :loans, only: [:create, :index]
         get 'profile', to: 'admins#profile'
       end
     end
