@@ -20,6 +20,14 @@ class Api::V1::Dashboard::LoansController < ApplicationController
             status: :ok
   end
 
+  def show
+    loan = ::Loan.find_by_id(params[:id])
+
+    render json: loan,
+            serializer: Api::V1::Dashboard::Loan::FullSerializer,
+            status: :ok
+  end
+
   private
 
   def loan_params

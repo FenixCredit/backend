@@ -12,7 +12,7 @@ class Api::V1::Dashboard::Loan::FullSerializer < ActiveModel::Serializer
   attribute(:promissory_note) do
     ActiveModelSerializers::SerializableResource.new(
       object.promissory_note,
-      serializer: Api::V1::Dashboard::PromissoryNote::OnlySerializer,
+      serializer: Api::V1::Dashboard::PromissoryNote::FullSerializer,
       adapter: :attributes
     )
   end

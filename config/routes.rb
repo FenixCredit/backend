@@ -12,7 +12,7 @@ Rails.application.routes.draw do
         resources :promoters, only: [:create, :index]
         resources :clients, only: [:create, :index]
         resources :guarantees, only: [:index]
-        resources :loans, only: [:create, :index]
+        resources :loans, only: [:create, :index, :show]
         resources :products, only: [:create]
         get '/cancellation_fee/:consultation_type', to: 'cancellation_fees#show'
 
