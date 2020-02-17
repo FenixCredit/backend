@@ -3,7 +3,8 @@ require 'elasticsearch/model'
 class Client < ApplicationRecord
   belongs_to :user
   belongs_to :promoter
-  has_many :loans
+  has_many :loans, dependent: :destroy
+  has_many :payments, dependent: :destroy
 
   enum client_type: { good: 1, bad: 2 }
 

@@ -66,6 +66,10 @@ class Loan::Create
         guarantee_id: guarantee.id
       ))
 
+      13.times do
+        ::Payment.create!(loan: loan, client: loan.client, promoter: loan.client.promoter)
+      end
+
       if form_promissory_note.save
 
         Result.new(

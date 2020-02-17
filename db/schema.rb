@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_31_235640) do
+ActiveRecord::Schema.define(version: 2020_02_09_185739) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -107,6 +107,19 @@ ActiveRecord::Schema.define(version: 2020_01_31_235640) do
     t.index ["client_id"], name: "index_loans_on_client_id"
   end
 
+  create_table "payments", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.float "quantity", default: 0.0
+    t.integer "status", default: 1
+    t.uuid "client_id"
+    t.uuid "loan_id"
+    t.uuid "promoter_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_payments_on_client_id"
+    t.index ["loan_id"], name: "index_payments_on_loan_id"
+    t.index ["promoter_id"], name: "index_payments_on_promoter_id"
+  end
+
   create_table "products", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.float "value", default: 0.0
@@ -175,6 +188,9 @@ ActiveRecord::Schema.define(version: 2020_01_31_235640) do
   add_foreign_key "guarantee_products", "promissory_notes"
   add_foreign_key "guarantees", "users"
   add_foreign_key "loans", "clients"
+  add_foreign_key "payments", "clients"
+  add_foreign_key "payments", "loans"
+  add_foreign_key "payments", "promoters"
   add_foreign_key "promissory_notes", "guarantees"
   add_foreign_key "promissory_notes", "loans"
   add_foreign_key "promoters", "employees"

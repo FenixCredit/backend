@@ -14,7 +14,7 @@ Rails.application.routes.draw do
         resources :guarantees, only: [:index]
         resources :loans, only: [:create, :index, :show]
         resources :products, only: [:create]
-        get '/cancellation_fee/:consultation_type', to: 'cancellation_fees#show'
+        resources :payments, only: [:update]
 
         get 'profile', to: 'admins#profile'
       end

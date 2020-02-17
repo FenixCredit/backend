@@ -16,4 +16,12 @@ class Api::V1::Dashboard::Loan::FullSerializer < ActiveModel::Serializer
       adapter: :attributes
     )
   end
+
+  attribute(:payments) do
+    ::Payment.get_executed(object).count + 1
+  end
+
+  attribute(:last_payment_status) do
+    ::Payment.get_executed(object).order(:updated_at).last&.status or 'not_executed'
+  end
 end
